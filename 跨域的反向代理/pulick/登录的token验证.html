@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/jquery.min.js"></script>
+</head>
+<body>
+    <button class="btn">登录</button>
+
+    <button class="get">获取</button>
+
+
+    <script>
+        function getPromise(url){
+            return new Promise((resolve,reject)=>{
+               fetch(url).then(result=>result.json())
+               .then(resolve).catch(reject)
+            })
+        }
+
+        $('.btn').on('click',function(){
+            getPromise('/api/v1/token')
+            .then(res=>{
+                sessionStorage.setItem('kew',res.token);
+            })
+        })
+
+        $('.get').on('click',function(){
+            getPromise(`/api/v1/getuse?token=${sessionStorage.kew}`)
+            .then(res=>{
+                console.log(res);
+            })
+        })
+    </script>
+</body>
+</html>
