@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         var obj1={
+            a:1,
+            b:3,
+            c:{
+                f:3,
+                e:{
+                    ss:'拷贝成功'
+                }
+            }
+        }
+        // <!-- 浅拷贝 -->
+        var obj2=obj1;
+        // console.dir(obj2);   //拷贝的都是地址
+        obj2.c.f=10;
+        // console.log(obj1);
+
+        var obj3=Object.assign({},obj2); //只有第一层是深拷贝,其他的都是拷贝的 地址
+        // console.log(obj3);
+
+        //深拷贝
+        var obj4=JSON.parse(JSON.stringify(obj1));  //一行代码深拷贝
+        console.log(obj4);
+        obj4.c.e.ss='牛皮';
+        console.log(obj1);
+
+    </script>
+  
+
+   
+</body>
+</html>
