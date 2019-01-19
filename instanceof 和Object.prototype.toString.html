@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str='sijja';
+        let str2=new String(111);
+        let num=123344;
+        let num2=new Number(222);
+        let obj={
+            name:'张三',
+            age:18
+        }
+        let arr=[2,2,3,4,5,6]
+        console.dir(str);
+        console.log(str2);
+        // instanceof 检测是构造函数  简单数据类型不不具有构造函数;
+        console.log(str instanceof String,111);
+        console.log(str2 instanceof String,111);
+        console.log(num instanceof Number,222);
+        console.log(num2 instanceof Number,222);
+
+        console.log(obj instanceof Object,888);
+        console.log(arr instanceof Array,888);
+        
+        // Object.prototype.toString.call() 检测的是类型
+        console.log(Object.prototype.toString.call(str));
+        console.log(Object.prototype.toString.call(str2));
+        console.log(Object.prototype.toString.call(num))
+        console.log(Object.prototype.toString.call(obj))
+        console.log(Object.prototype.toString.call(arr))
+        
+
+        
+    </script>
+</body>
+</html>
