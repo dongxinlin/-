@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.min.js"></script>
+</head>
+<body>
+    <button id="btn">点我获取</button>
+    <script>
+        $('#btn').on('click',function(){
+            $.ajax({
+                url:'http://127.0.0.1:9999/',
+                type:'get',
+                dataType:'jsonp',
+                data:{
+                    a:1,
+                    b:2
+                },
+                success(res){   
+                    console.log(res);
+                }
+            });
+        })
+    </script>
+</body>
+</html>

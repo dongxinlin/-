@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let flag=1;
+        
+        function stp1(resolve,reject){
+            if(flag){
+                resolve('完成1')
+            }else{
+                reject('没完成1')
+                flag=0;
+            }
+        }
+
+        function stp2(resolve,reject){
+            if(flag==1){
+                resolve('完成2');
+            }else{
+                reject('没完成2');
+                flag=0;
+            }
+        }
+
+        function stp3(resolve,reject){
+            if(flag==1){
+                resolve('完成3');
+            }else{
+                reject('没完成3');
+                flag=0;
+            }
+        }
+
+        function stp4(resolve,reject){
+            if(flag==1){
+                resolve('完成4');
+            }else{
+                reject('没完成4');
+            }
+        }
+
+        new Promise(stp1).then(v1=>{
+            console.log(v1);
+            return new Promise(stp2)
+        }).then(v2=>{
+            console.log(v2);
+            return new Promise(stp3);
+        }).then(v3=>{
+            console.log(v3);
+            return new Promise(stp4);
+        }).then(v4=>{
+            console.log(v4);
+        })
+    </script>
+</body>
+</html>

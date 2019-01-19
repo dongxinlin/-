@@ -1,0 +1,151 @@
+@charset "UTF-8";
+$setting: (
+    // {Boolean} 是否开启厂商前缀
+    is-vendor-prefix: true,
+    // {String} 厂商前缀
+    vendor-prefix:    -webkit-
+);
+// responsive media types
+$media-types: (
+    // {String} 横屏
+    landscape: "(orientation: landscape)",
+    // {String} 竖屏
+    portrait:  "(orientation: portrait)",
+    // 视网膜屏定义，这里不做非常细节的界定，比如完全一致的整数倍
+    // retina1x：< 1.5dppx；
+    // retina2x：1.5dppx ~ 2.49dppx
+    // retina3x：>= 2.5dppx
+    // {String} 非视网膜屏
+    retina1x:  "(max--moz-device-pixel-ratio: 1.49),
+                (-webkit-max-device-pixel-ratio: 1.49),
+                (max-device-pixel-ratio: 1.49),
+                (max-resolution: 143dpi),
+                (max-resolution: 1.49dppx)",
+    // {String} 视网膜屏2x
+    retina2x:  "(min--moz-device-pixel-ratio: 1.5) and (max--moz-device-pixel-ratio: 2.49),
+                (-webkit-min-device-pixel-ratio: 1.5) and (-webkit-max-device-pixel-ratio: 2.49),
+                (min-device-pixel-ratio: 1.5) and (max-device-pixel-ratio: 2.49),
+                (min-resolution: 144dpi) and (max-resolution: 239dpi),
+                (min-resolution: 1.5dppx) and (max-resolution: 2.49dppx)",
+    // {String} 视网膜屏3x
+    retina3x:  "(min--moz-device-pixel-ratio: 2.5),
+                (-webkit-min-device-pixel-ratio: 2.5),
+                (min-device-pixel-ratio: 2.5),
+                (min-resolution: 240dpi),
+                (min-resolution: 2.5dppx)",
+    // 待添加stop-points
+    // 用于常规手机横竖屏
+    xs:        "(max-width: 767px)",
+    // 用于常规pad横竖屏
+    s:         "(min-width: 768px) and (max-width: 1024px)",
+    // 用于常规笔记本
+    m:         "(min-width: 1025px) and (max-width: 1280px)",
+    // 用于常规台式机
+    l:         "(min-width: 1281px) and (max-width: 1440px)",
+    // 用于超大台式机
+    xl:        "(min-width: 1441px)"
+);
+
+
+@mixin _prefix($property, $value) {
+    // 老式浏览器
+    // 是否开启厂商前缀支持
+    @if map-get($setting, is-vendor-prefix) {
+        // 遍历输出厂商代码
+        @each $vendor in map-get($setting, vendor-prefix) {
+            #{$vendor}#{$property}: $value;
+        }
+    }
+    // 现代浏览器（支持最新草案）
+    #{$property}: $value;
+}
+
+@mixin responsive($media) {
+    @if not map-has-key($media-types, $media) {
+        @warn "#{$media} is not a known media type. Using portrait instead.";
+        $media: portrait;
+    }
+    @media #{map-get($media-types, $media)} {
+        @content;
+    }
+}
+@mixin transform($transform...) {
+    @include _prefix(transform, $transform);
+}
+@mixin transform-origin($transform-origin) {
+    @include _prefix(transform-origin, $transform-origin);
+}
+
+/**
+ * @module core
+ * @class 背景与边框
+ * @description 为元素添加边框（包括1px边框）
+ * @method border
+ * @version 2.0.0
+ * @param {String} $border-width 指定边框厚度（单位为px），默认值：1px，取值与`border-width`属性一致，不同方向代表边框位置 {add:2.0.0}
+ * @param {String} $border-color 指定边框颜色 {add:2.0.0}
+ * @param {String} $border-style 指定边框样式 {add:2.0.0}
+ * @param {String} $radius 指定边框圆角半径，默认值：null {add:2.0.0}
+ */
+@mixin border($border-width: 1px, $border-color: map-get($base, border-color), $border-style: solid, $radius: null) {
+    // 为边框位置提供定位参考
+    position: relative;
+    @if $border-width == null {
+        $border-width: 0;
+    }
+    border-radius: $radius;
+    &::after {
+        // 用以解决边框layer遮盖内容
+        pointer-events: none;
+        position: absolute;
+        z-index: 999;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        content: "\0020";
+        border-color: $border-color;
+        border-style: $border-style;
+        border-width: $border-width;
+        // 适配dpr进行缩放
+        @include responsive(retina1x) {
+            width: 100%;
+            height: 100%;
+            @if $radius != null {
+                border-radius: $radius;
+            }
+        }
+        @include responsive(retina2x) {
+            width: 200%;
+            height: 200%;
+            @include transform(scale(0.5));
+            @if $radius != null {
+                border-radius: $radius * 2;
+            }
+        }
+        @include responsive(retina3x) {
+            width: 300%;
+            height: 300%;
+            @include transform(scale(1/3));
+            @if $radius != null {
+                border-radius: $radius * 3;
+            }
+        }
+        @include transform-origin(0 0);
+    }
+}
+
+
+
+div{
+    width:300px;
+    height:300px;
+    // @include  border($border-width: 1px, $border-color: #ccc, $border-style: solid, $radius:10px);
+}
+
+
+.bdm {
+    @include  border($border-width: 0 1px 1px 0 , $border-color: red, $border-style: solid, $radius:5px);
+}
+.bdt {
+    @include  border($border-width: 1px 0 0 0 , $border-color: red, $border-style: solid, $radius:0px);
+}

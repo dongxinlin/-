@@ -1,0 +1,89 @@
+@charset "UTF-8";
+/**
+ * @module core
+ * @class 背景与边框
+ * @description 为元素添加边框（包括1px边框）
+ * @method border
+ * @version 2.0.0
+ * @param {String} $border-width 指定边框厚度（单位为px），默认值：1px，取值与`border-width`属性一致，不同方向代表边框位置 {add:2.0.0}
+ * @param {String} $border-color 指定边框颜色 {add:2.0.0}
+ * @param {String} $border-style 指定边框样式 {add:2.0.0}
+ * @param {String} $radius 指定边框圆角半径，默认值：null {add:2.0.0}
+ */
+div {
+  width: 300px;
+  height: 300px; }
+
+.bdm {
+  position: relative;
+  border-radius: 5px; }
+  .bdm::after {
+    pointer-events: none;
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    content: "\0020";
+    border-color: red;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0; }
+    @media (max--moz-device-pixel-ratio: 1.49), (-webkit-max-device-pixel-ratio: 1.49), (max-device-pixel-ratio: 1.49), (max-resolution: 143dpi), (max-resolution: 1.49dppx) {
+      .bdm::after {
+        width: 100%;
+        height: 100%;
+        border-radius: 5px; } }
+    @media (min--moz-device-pixel-ratio: 1.5) and (max--moz-device-pixel-ratio: 2.49), (-webkit-min-device-pixel-ratio: 1.5) and (-webkit-max-device-pixel-ratio: 2.49), (min-device-pixel-ratio: 1.5) and (max-device-pixel-ratio: 2.49), (min-resolution: 144dpi) and (max-resolution: 239dpi), (min-resolution: 1.5dppx) and (max-resolution: 2.49dppx) {
+      .bdm::after {
+        width: 200%;
+        height: 200%;
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+        border-radius: 10px; } }
+    @media (min--moz-device-pixel-ratio: 2.5), (-webkit-min-device-pixel-ratio: 2.5), (min-device-pixel-ratio: 2.5), (min-resolution: 240dpi), (min-resolution: 2.5dppx) {
+      .bdm::after {
+        width: 300%;
+        height: 300%;
+        -webkit-transform: scale(1/3);
+        transform: scale(1/3);
+        border-radius: 15px; } }
+
+.bdt {
+  position: relative;
+  border-radius: 0px; }
+  .bdt::after {
+    pointer-events: none;
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    content: "\0020";
+    border-color: red;
+    border-style: solid;
+    border-width: 1px 0 0 0;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0; }
+    @media (max--moz-device-pixel-ratio: 1.49), (-webkit-max-device-pixel-ratio: 1.49), (max-device-pixel-ratio: 1.49), (max-resolution: 143dpi), (max-resolution: 1.49dppx) {
+      .bdt::after {
+        width: 100%;
+        height: 100%;
+        border-radius: 0px; } }
+    @media (min--moz-device-pixel-ratio: 1.5) and (max--moz-device-pixel-ratio: 2.49), (-webkit-min-device-pixel-ratio: 1.5) and (-webkit-max-device-pixel-ratio: 2.49), (min-device-pixel-ratio: 1.5) and (max-device-pixel-ratio: 2.49), (min-resolution: 144dpi) and (max-resolution: 239dpi), (min-resolution: 1.5dppx) and (max-resolution: 2.49dppx) {
+      .bdt::after {
+        width: 200%;
+        height: 200%;
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+        border-radius: 0px; } }
+    @media (min--moz-device-pixel-ratio: 2.5), (-webkit-min-device-pixel-ratio: 2.5), (min-device-pixel-ratio: 2.5), (min-resolution: 240dpi), (min-resolution: 2.5dppx) {
+      .bdt::after {
+        width: 300%;
+        height: 300%;
+        -webkit-transform: scale(1/3);
+        transform: scale(1/3);
+        border-radius: 0px; } }
+
+/*# sourceMappingURL=retina-border.css.map */

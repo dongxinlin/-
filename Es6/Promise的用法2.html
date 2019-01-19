@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p=new Promise((resolve,reject)=>{
+            //这里的fetch只是为了拿到数据
+            fetch('data/arr.txt').then(result=>result.text()).then((data)=>{
+                resolve(data);
+            }).catch(err=>{
+                reject(err);
+            })      
+        }).then(data=>{
+            console.log(data);
+        },err=>{
+            console.log(err);
+        })
+    </script>
+</body>
+</html>

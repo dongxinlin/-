@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.min.js"></script>
+</head>
+<body>
+    <input type="text" id="text">
+    <script>
+        $('#text').on('input',()=>{
+            var  textVal=$('#text').val();
+            $.ajax({
+                url:`https://www.baidu.com/his?wd=${textVal}&json=1&p=3&sid=1442_21081_28132_26350_28266_27244_20719&sc=eb&csor=0&cb=jQuery11020270562834705917_1547102955073&_=1547102955084`,
+                dataType:'jsonp',
+                jsonp:'cb',
+                success(res){
+                    console.log(res);
+                }
+                
+            });
+        })
+    </script>
+</body>
+</html>

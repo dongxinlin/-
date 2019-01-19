@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr2=[22,344,55,22,123]
+
+        // 映射 返回一个新数组,不会改变原来的数组
+        let arrMap=arr2.map(item=>item*2)
+        console.log(arrMap);
+        console.log(arr2);
+
+        // filter 过滤  返回满足条件的item
+        let arrFilter=arr2.filter(item=>item>22);
+        console.log(arrFilter);
+
+        // every 每一个的意思   所有item都满足条件会返回truef否则false
+        let arrEvery=arr2.every(item=>item>22);
+        console.log(arrEvery);
+
+        // some  只要有一个item满足条件都会返回true否则false
+        let arrSome=arr2.some(item=>item>22);
+        console.log(arrSome);
+
+        // findIndex  返回满足条件的索引 当找到满足条件的索引会自动跳出循环
+        let arrFindIndex=arr2.findIndex(item=>item>22);
+        console.log(arrFindIndex);
+    </script>
+</body>
+</html>
